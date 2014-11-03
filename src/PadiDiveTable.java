@@ -65,7 +65,6 @@ public class PadiDiveTable {
 			throw new TimeOutOfRangeException();
 		}
 
-		
 		char pressureGroup = (char) (y + '@');
 		return pressureGroup;
 	}
