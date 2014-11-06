@@ -20,8 +20,6 @@ public class PadiDiveTableTest {
 			//make sure the arrows (-1) works
 			assertEquals("Expecting the value B", 'B', PadiDiveTable.getPressureGroup(140, 4));
 			assertEquals("Expecting the value G", 'G', PadiDiveTable.getPressureGroup(100, 12));
-
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
