@@ -134,7 +134,21 @@ private static int[][][] surfacetable = new int[][][]{
 	
 }
    
-   
+//this function gives the residual nitrogen time when a person plans for another dive
+	//assuming depth is an actual depth listed in the array
+	public static int getresidualnitrogentime(int depth, char lettergroup){
+		int y = lettergroup - '@';
+		System.out.println(y);
+		int x =0;
+		for (int i = 0; i < pressureGroup[0].length; i++) {
+			if (depth <= pressureGroup[0][i]) {
+				x = i;
+				break;
+			}
+		}
+		return pressureGroup[y][x];
+	}
+	   
 }
 
 @SuppressWarnings("serial")
