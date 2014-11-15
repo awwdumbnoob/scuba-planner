@@ -6,6 +6,9 @@
  */
 
 public class PadiDiveTable {
+
+  private static int residualnitrogentime = 0;
+	private static int totalnitrogentime = 0;
 	private static int[][] pressureGroup = new int[][] {
 		{35, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140},
 		{10, 8, 7, 6, 5, 4, 4, 3, 3, 3, 3, -1},
@@ -102,7 +105,36 @@ private static int[][][] surfacetable = new int[][][]{
 		char pressureGroup = (char) (y + '@');
 		return pressureGroup;
 	}
+		//this function looks at the surface table to determine new letter group after a dive
+	// the rest time refers to time out of water
+	// the pressuregroup refers to the group entered after dive.  
+	// returns 'a' if the rest is longer than the last column
+	public static char newpressuregrouprest(int resttime, char pressuregroup){
+		int grouptocheck = pressuregroup-'@' -1;
 	
+		int grouplength = surfacetable[grouptocheck].length;
+		
+		char value = 'x';
+		
+		if(resttime>surfacetable[grouptocheck][grouplength-1][1]){
+			residualnitrogentime = 0;
+		
+		value = 'a'; //when the rest is greater than the last column value in the group
+	} else{
+		  for(int i=0;i<grouplength;i++){
+			  if(((surfacetable[grouptocheck][i][0] <= resttime ) && (surfacetable[grouptocheck][i][1] >= resttime))
+					  ){
+				  
+				  value = (char) (Math.abs(i-(grouplength-1)) + '@' +1);
+			  }
+		  }
+	}
+	
+		return value;
+	
+}
+   
+   
 }
 
 @SuppressWarnings("serial")
