@@ -32,6 +32,10 @@ public class ScubaDive extends Application
     Label previousDiveTime = new Label("Previous Dive Time: ");
     Label surfaceIntervalTime = new Label("Surface Interval Time (SIT): ");
     Label preferenceUnits = new Label("Units: ");
+    Label depth = new Label("Depth:");
+    Label depthFeet = new Label("Feet");
+    Label runTime = new Label("Trial Time:");
+    Label runTimeSeconds = new Label("Seconds");
     TextField eventNameField = new TextField();
     TextField fromField = new TextField("MM/DD/YYY");
     TextField fromTime = new TextField("HH:MM");
@@ -39,6 +43,8 @@ public class ScubaDive extends Application
     TextField timeField = new TextField("HH:MM");
     TextField pdt = new TextField("00h00m00s");
     TextField sit = new TextField("00h00m00s");
+    TextField depthText = new TextField();
+    TextField runTimeText = new TextField("00:00");
     Button gas = new Button("Gas Settings");
     Button gasOk = new Button ("OK");
     Button gasCancel = new Button ("Cancel");
@@ -76,7 +82,8 @@ public class ScubaDive extends Application
         primaryStage.setTitle("Dive Planner (WARNING: THIS IS A PROTOTYPE!)");
         primaryStage.setScene(scene);
         primaryStage.show();
-        //File Menu
+    
+    //File Menu
         MenuBar fileMenu = new MenuBar();
         Menu file = new Menu("File");
         MenuItem New = new MenuItem("New");
@@ -91,58 +98,20 @@ public class ScubaDive extends Application
             }
         });
         file.getItems().addAll(New, Open, Save, saveAs, Exit);
-        //Edit Menu
+    
+    //Edit Menu
         Menu edit = new Menu("Edit");
-        Menu view = new Menu("View");
-        Menu help = new Menu("Help");
-        fileMenu.getMenus().addAll(file, edit, view, help);
-        
-        root.setAlignment(Pos.TOP_LEFT);
-        root.setHgap(10);
-        root.setVgap(10);
-        root.add(fileMenu, 1, 1);
-        root.add(eventName, 1, 2);
-        root.add(eventNameField, 2, 2);
-        root.add(date, 1, 3);
-        root.add(dateField, 2, 3);
-        root.add(time, 1, 4);
-        root.add(timeField, 2, 4);
-        root.add(optionsList4, 3, 4);
-        root.add(gas, 1, 5);
-        root.add(dive, 1, 6);
-        root.add(preferences, 1, 7);
-        root.add(save, 1, 8);
-        root.add(prototype, 1, 9);
-        
-        gas.setOnAction(new EventHandler<ActionEvent>() 
-        {
-        	@Override
-        	public void handle(ActionEvent actionEvent)
-                {
-                    GridPane root = new GridPane();
-                    Scene GasWindow = new Scene(root, 325, 150);
-                    
-                    root.setAlignment(Pos.TOP_LEFT);
-                    root.setHgap(10);
-                    root.setVgap(10);
-                    root.add(o2, 1, 1);
-                    root.add(optionsList, 2, 1);
-                    root.add(he, 1, 2);
-                    root.add(optionsList2, 2, 2);
-                    root.add(ne, 1, 3);
-                    root.add(optionsList3, 2, 3);
-                    root.add(gasOk, 3, 4);
-                    root.add(gasCancel, 4, 4);
-                    root.add(gasApply, 5, 4);
-        	    
-                    Stage GasOptions = new Stage();
-                    GasOptions.setTitle("Gas Settings");
-                    GasOptions.setScene(GasWindow);
-                    GasOptions.show();
-        	}
-        });
-        
-        dive.setOnAction(new EventHandler<ActionEvent>() 
+        MenuItem undo = new MenuItem("Undo");
+        MenuItem redo = new MenuItem("Redo");
+        MenuItem cut = new MenuItem("Cut");
+        MenuItem copy = new MenuItem("Copy");
+        MenuItem paste = new MenuItem("Paste");
+        MenuItem delete = new MenuItem("Delete");
+        MenuItem selectAll = new MenuItem("Select All");
+        MenuItem diveSettings = new MenuItem("Dive Settings");
+        MenuItem preferences = new MenuItem("Preferences");
+        edit.getItems().addAll(undo, redo, cut, copy, paste, delete, selectAll, diveSettings, preferences);
+        diveSettings.setOnAction(new EventHandler<ActionEvent>() 
         {
         	@Override
         	public void handle(ActionEvent actionEvent)
@@ -190,6 +159,70 @@ public class ScubaDive extends Application
                     Stage GasOptions = new Stage();
                     GasOptions.setTitle("Preferences");
                     GasOptions.setScene(PreferenceWindow);
+                    GasOptions.show();
+        	}
+        });
+        
+    //View Menu
+        Menu view = new Menu("View");
+        MenuItem zoomIn = new MenuItem("Zoom in");
+        MenuItem zoomOut = new MenuItem("Zoom out");
+        MenuItem zoomDefault = new MenuItem("Zoom default");
+        MenuItem zoomToFit = new MenuItem("Zoom to fit");
+        view.getItems().addAll(zoomIn, zoomOut, zoomDefault, zoomToFit);
+        
+    //Help menu
+        Menu help = new Menu("Help");
+        MenuItem divePlannerManual = new MenuItem("Dive Planner Manual");
+        help.getItems().addAll(divePlannerManual);
+    
+    //Home Screen
+        fileMenu.getMenus().addAll(file, edit, view, help);
+        root.setAlignment(Pos.TOP_LEFT);
+        root.setHgap(10);
+        root.setVgap(10);
+        root.add(fileMenu, 1, 1);
+        root.add(eventName, 1, 2);
+        root.add(eventNameField, 2, 2);
+        root.add(date, 1, 3);
+        root.add(dateField, 2, 3);
+        root.add(time, 1, 4);
+        root.add(timeField, 2, 4);
+        root.add(optionsList4, 3, 4);
+        root.add(depth, 1, 5);
+        root.add(depthText, 2, 5);
+        root.add(depthFeet, 3, 5);
+        root.add(runTime, 1, 6);
+        root.add(runTimeText, 2, 6);
+        root.add(runTimeSeconds, 3, 6);
+        root.add(gas, 1, 7);
+        root.add(save, 1, 8);
+        root.add(prototype, 1, 9);
+        
+        gas.setOnAction(new EventHandler<ActionEvent>() 
+        {
+        	@Override
+        	public void handle(ActionEvent actionEvent)
+                {
+                    GridPane root = new GridPane();
+                    Scene GasWindow = new Scene(root, 325, 150);
+                    
+                    root.setAlignment(Pos.TOP_LEFT);
+                    root.setHgap(10);
+                    root.setVgap(10);
+                    root.add(o2, 1, 1);
+                    root.add(optionsList, 2, 1);
+                    root.add(he, 1, 2);
+                    root.add(optionsList2, 2, 2);
+                    root.add(ne, 1, 3);
+                    root.add(optionsList3, 2, 3);
+                    root.add(gasOk, 3, 4);
+                    root.add(gasCancel, 4, 4);
+                    root.add(gasApply, 5, 4);
+        	    
+                    Stage GasOptions = new Stage();
+                    GasOptions.setTitle("Gas Settings");
+                    GasOptions.setScene(GasWindow);
                     GasOptions.show();
         	}
         });
