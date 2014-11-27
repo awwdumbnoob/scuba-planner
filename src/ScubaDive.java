@@ -24,7 +24,6 @@ public class ScubaDive extends Application
     GridPane root = new GridPane();
     Label eventName = new Label(" Project Name: ");
     Label date = new Label(" Date:      ");
-    Label time = new Label(" Time: ");
     Label prototype = new Label(" (THIS IS A PROTOTYPE!)");
     Label o2 = new Label("O2 Level: ");
     Label he = new Label("HE Level: ");
@@ -32,10 +31,17 @@ public class ScubaDive extends Application
     Label previousDiveTime = new Label("Previous Dive Time: ");
     Label surfaceIntervalTime = new Label("Surface Interval Time (SIT): ");
     Label preferenceUnits = new Label("Units: ");
-    Label depth = new Label("Depth:");
-    Label depthFeet = new Label("Feet");
-    Label runTime = new Label("Trial Time:");
+    Label depthOne = new Label("Dive 1 Depth:");
+    Label depthTwo = new Label("Dive 2 Depth:");
+    Label depthLabelOne = new Label("Feet");
+    Label depthLabelTwo = new Label("Feet");
+    Label runTimeOne = new Label("Dive 1 Time:");
+    Label runTimeTwo = new Label("Dive 2 Time:");
     Label runTimeSeconds = new Label("Seconds");
+    Label minutesOne = new Label("Minutes");
+    Label minutesTwo = new Label("Minutes");
+    Label secondsOne = new Label("Seconds");
+    Label secondsTwo = new Label("Seconds");
     TextField eventNameField = new TextField();
     TextField fromField = new TextField("MM/DD/YYY");
     TextField fromTime = new TextField("HH:MM");
@@ -69,9 +75,18 @@ public class ScubaDive extends Application
     ComboBox optionsList2 = new ComboBox(options2);
     ObservableList<String> options3 = FXCollections.observableArrayList("10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%");
     ComboBox optionsList3 = new ComboBox(options3);
-    ObservableList<String> options4 = FXCollections.observableArrayList("AM", "PM");
-    ComboBox optionsList4 = new ComboBox(options4);
-    
+    ObservableList<String> hoursOne = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
+    ComboBox optionsList5 = new ComboBox(hoursOne);
+    ObservableList<String> minutesboxOne = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
+    ComboBox optionsList6 = new ComboBox(minutesboxOne);
+    ObservableList<String> hoursTwo = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
+    ComboBox optionsList7 = new ComboBox(hoursTwo);
+    ObservableList<String> minutesboxTwo = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
+    ComboBox optionsList8 = new ComboBox(minutesboxTwo);
+    ObservableList<String> depthboxOne = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
+    ComboBox optionsList9 = new ComboBox(depthboxOne);
+    ObservableList<String> depthboxTwo = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
+    ComboBox optionsList10 = new ComboBox(depthboxTwo);
     public static void main(String[] args) 
     {ScubaDive.launch();}  
     @Override
@@ -186,18 +201,25 @@ public class ScubaDive extends Application
         root.add(eventNameField, 2, 2);
         root.add(date, 1, 3);
         root.add(dateField, 2, 3);
-        root.add(time, 1, 4);
-        root.add(timeField, 2, 4);
-        root.add(optionsList4, 3, 4);
-        root.add(depth, 1, 5);
-        root.add(depthText, 2, 5);
-        root.add(depthFeet, 3, 5);
-        root.add(runTime, 1, 6);
-        root.add(runTimeText, 2, 6);
-        root.add(runTimeSeconds, 3, 6);
-        root.add(gas, 1, 7);
-        root.add(save, 1, 8);
-        root.add(prototype, 1, 9);
+        root.add(runTimeOne, 1, 4);
+        root.add(optionsList5, 2, 4);
+        root.add(minutesOne, 3, 4);
+        root.add(optionsList6, 4, 4);
+        root.add(secondsOne, 5, 4);
+        root.add(depthOne, 1, 5);
+        root.add(optionsList9, 2, 5);
+        root.add(depthLabelOne, 3, 5);
+        root.add(runTimeTwo, 1, 6);
+        root.add(optionsList7, 2, 6);
+        root.add(minutesTwo, 3, 6);
+        root.add(optionsList8, 4, 6);
+        root.add(secondsTwo, 5, 6);
+        root.add(depthTwo, 1, 7);
+        root.add(optionsList10, 2, 7);
+        root.add(depthLabelTwo, 3, 7);
+        root.add(gas, 1, 8);
+        root.add(save, 1, 9);
+        root.add(prototype, 1, 10);
         
         gas.setOnAction(new EventHandler<ActionEvent>() 
         {
