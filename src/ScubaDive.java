@@ -37,11 +37,32 @@ public class ScubaDive extends Application
     Label depthLabelTwo = new Label("Feet");
     Label runTimeOne = new Label("Dive 1 Time:");
     Label runTimeTwo = new Label("Dive 2 Time:");
+    Label surfaceTime = new Label("Surface Time: ");
     Label runTimeSeconds = new Label("Seconds");
     Label minutesOne = new Label("Minutes");
     Label minutesTwo = new Label("Minutes");
-    Label secondsOne = new Label("Seconds");
-    Label secondsTwo = new Label("Seconds");
+    Label minutesThree = new Label("Minutes");
+    Label resultDiveOne = new Label("Dive 1:");
+    Label resultDiveOneField = new Label();
+    Label resultTimeOne = new Label("Total Time:");
+    Label resultTimeOneField = new Label();
+    Label resultDepthOne = new Label("Depth:");
+    Label resultDepthOneField = new Label();
+    Label resultLetterOne = new Label("Lettergroup:");
+    Label resultLetterOneField = new Label();
+    Label resultDiveTwo = new Label("Dive 2:");
+    Label resultDiveTwoField = new Label();
+    Label resultTimeTwo = new Label("Total Time:");
+    Label resultTimeTwoField = new Label();
+    Label resultDepthTwo = new Label("Depth:");
+    Label resultDepthTwoField = new Label();
+    Label resultLetterTwo = new Label("Lettergroup:");
+    Label resultLetterTwoField = new Label();
+    Label resultSurfaceTime = new Label("Surface Time:");
+    Label resultSurfaceTimeField = new Label();
+    Label results = new Label("Results");
+    //Label secondsOne = new Label("Minutes");
+    //Label secondsTwo = new Label("Minutes");
     TextField eventNameField = new TextField();
     TextField fromField = new TextField("MM/DD/YYY");
     TextField fromTime = new TextField("HH:MM");
@@ -51,6 +72,9 @@ public class ScubaDive extends Application
     TextField sit = new TextField("00h00m00s");
     TextField depthText = new TextField();
     TextField runTimeText = new TextField("00:00");
+    TextField timeOne = new TextField();
+    TextField timeTwo = new TextField();
+    TextField surfaceTimeField = new TextField();
     Button gas = new Button("Gas Settings");
     Button gasOk = new Button ("OK");
     Button gasCancel = new Button ("Cancel");
@@ -66,7 +90,7 @@ public class ScubaDive extends Application
     Button preferenceApply = new Button ("Apply");
     RadioButton preferenceFeet = new RadioButton("Feet");
     RadioButton preferenceMeters = new RadioButton("Meter");
-    Button save = new Button("Save File");
+    Button calculate = new Button("Calculate");
     Button done = new Button("Done");
     Button cancel = new Button("Cancel");
     ObservableList<String> options1 = FXCollections.observableArrayList("10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%");
@@ -75,17 +99,17 @@ public class ScubaDive extends Application
     ComboBox optionsList2 = new ComboBox(options2);
     ObservableList<String> options3 = FXCollections.observableArrayList("10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%");
     ComboBox optionsList3 = new ComboBox(options3);
-    ObservableList<String> hoursOne = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
-    ComboBox optionsList5 = new ComboBox(hoursOne);
-    ObservableList<String> minutesboxOne = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
-    ComboBox optionsList6 = new ComboBox(minutesboxOne);
-    ObservableList<String> hoursTwo = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
-    ComboBox optionsList7 = new ComboBox(hoursTwo);
-    ObservableList<String> minutesboxTwo = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
-    ComboBox optionsList8 = new ComboBox(minutesboxTwo);
-    ObservableList<String> depthboxOne = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
+    //ObservableList<String> hoursOne = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
+    //ComboBox optionsList5 = new ComboBox(hoursOne);
+    //ObservableList<String> minutesboxOne = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
+    //ComboBox optionsList6 = new ComboBox(minutesboxOne);
+    //ObservableList<String> hoursTwo = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
+    //ComboBox optionsList7 = new ComboBox(hoursTwo);
+    //ObservableList<String> minutesboxTwo = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
+    //ComboBox optionsList8 = new ComboBox(minutesboxTwo);
+    ObservableList<String> depthboxOne = FXCollections.observableArrayList("35", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140");
     ComboBox optionsList9 = new ComboBox(depthboxOne);
-    ObservableList<String> depthboxTwo = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
+    ObservableList<String> depthboxTwo = FXCollections.observableArrayList("35", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140");
     ComboBox optionsList10 = new ComboBox(depthboxTwo);
     public static void main(String[] args) 
     {ScubaDive.launch();}  
@@ -93,11 +117,51 @@ public class ScubaDive extends Application
     
     public void start(Stage primaryStage) 
     {
-        Scene scene = new Scene(root, 500, 500);
+        Scene scene = new Scene(root, 600, 500);
         primaryStage.setTitle("Dive Planner (WARNING: THIS IS A PROTOTYPE!)");
         primaryStage.setScene(scene);
         primaryStage.show();
     
+     // start caluclations on save button
+        calculate.setOnAction(new EventHandler<ActionEvent>()
+        		{	
+        		
+        		@Override
+        		public void handle(ActionEvent actionEvent)
+        		    {
+        			    resultSurfaceTimeField.setText(surfaceTimeField.getText());
+        			    resultTimeOneField.setText(timeOne.getText());
+        			    resultTimeTwoField.setText(timeTwo.getText());
+      
+        			    resultDepthOneField.setText(optionsList9.getSelectionModel().getSelectedItem().toString());
+        			    
+        			    resultDepthTwoField.setText(optionsList10.getSelectionModel().getSelectedItem().toString());
+        			    
+        			    
+        			    try {
+        			    	char letter1 = PadiDiveTable.getPressureGroup(Integer.parseInt(optionsList9.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(timeOne.getText()));
+							
+        			    	resultLetterOneField.setText(Character.toString(letter1));
+        			    	char rest = PadiDiveTable.newpressuregrouprest(Integer.parseInt(surfaceTimeField.getText()), letter1);
+        			    	System.out.println(rest);
+        			    
+        			    	int residualtime = PadiDiveTable.getresidualnitrogentime(Integer.parseInt(optionsList10.getSelectionModel().getSelectedItem().toString()), rest);
+        			    	
+        			    	char letter2 = PadiDiveTable.getPressureGroup(Integer.parseInt(optionsList10.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(timeTwo.getText())+residualtime);
+						    resultLetterTwoField.setText(Character.toString(letter2));
+        			    } catch (NumberFormatException
+								| DepthOutOfRangeException
+								| TimeOutOfRangeException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+        			    
+        			    
+        		    }
+        		});
+        
+        
+        
     //File Menu
         MenuBar fileMenu = new MenuBar();
         Menu file = new Menu("File");
@@ -195,31 +259,53 @@ public class ScubaDive extends Application
         fileMenu.getMenus().addAll(file, edit, view, help);
         root.setAlignment(Pos.TOP_LEFT);
         root.setHgap(10);
-        root.setVgap(10);
+        root.setVgap(0);
         root.add(fileMenu, 1, 1);
         root.add(eventName, 1, 2);
         root.add(eventNameField, 2, 2);
         root.add(date, 1, 3);
         root.add(dateField, 2, 3);
         root.add(runTimeOne, 1, 4);
-        root.add(optionsList5, 2, 4);
+        root.add(timeOne, 2, 4);
         root.add(minutesOne, 3, 4);
-        root.add(optionsList6, 4, 4);
-        root.add(secondsOne, 5, 4);
+        //root.add(optionsList6, 4, 4);
+        //root.add(secondsOne, 5, 4);
         root.add(depthOne, 1, 5);
         root.add(optionsList9, 2, 5);
         root.add(depthLabelOne, 3, 5);
-        root.add(runTimeTwo, 1, 6);
-        root.add(optionsList7, 2, 6);
-        root.add(minutesTwo, 3, 6);
-        root.add(optionsList8, 4, 6);
-        root.add(secondsTwo, 5, 6);
-        root.add(depthTwo, 1, 7);
-        root.add(optionsList10, 2, 7);
-        root.add(depthLabelTwo, 3, 7);
-        root.add(gas, 1, 8);
-        root.add(save, 1, 9);
-        root.add(prototype, 1, 10);
+        root.add(surfaceTime, 1, 6);
+        root.add(surfaceTimeField, 2, 6);
+        root.add(minutesThree, 3, 6);
+        root.add(runTimeTwo, 1, 7);
+        root.add(timeTwo, 2, 7);
+        root.add(minutesTwo, 3, 7);
+        //root.add(optionsList8, 4, 6);
+        //root.add(secondsTwo, 5, 6);
+        root.add(depthTwo, 1, 8);
+        root.add(optionsList10, 2, 8);
+        root.add(depthLabelTwo, 3, 8);
+        root.add(gas, 1, 9);
+        root.add(calculate, 1, 10);
+        root.add(results, 1, 11);
+        root.add(resultDiveOne, 1, 12);
+        root.add(resultDiveOneField, 2, 12);
+        root.add(resultTimeOne, 1, 13);
+        root.add(resultTimeOneField, 2, 13);
+        root.add(resultDepthOne, 1, 14);
+        root.add(resultDepthOneField, 2, 14);
+        root.add(resultLetterOne, 1, 15);
+        root.add(resultLetterOneField, 2, 15);
+        root.add(resultSurfaceTime, 1, 16);
+        root.add(resultSurfaceTimeField, 2, 16);
+        root.add(resultDiveTwo, 1, 17);
+        root.add(resultDiveTwoField, 2, 17);
+        root.add(resultTimeTwo, 1, 18);
+        root.add(resultTimeTwoField, 2, 18);
+        root.add(resultDepthTwo, 1, 19);
+        root.add(resultDepthTwoField, 2, 19);
+        root.add(resultLetterTwo, 1, 20);
+        root.add(resultLetterTwoField, 2, 20);
+        root.add(prototype, 1, 21);
         
         gas.setOnAction(new EventHandler<ActionEvent>() 
         {
