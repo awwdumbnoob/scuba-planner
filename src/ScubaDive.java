@@ -1,3 +1,5 @@
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -61,6 +63,7 @@ public class ScubaDive extends Application
     Label resultSurfaceTime = new Label("Surface Time:");
     Label resultSurfaceTimeField = new Label();
     Label results = new Label("Results");
+    Label request = new Label();
     //Label secondsOne = new Label("Minutes");
     //Label secondsTwo = new Label("Minutes");
     TextField eventNameField = new TextField();
@@ -121,7 +124,11 @@ public class ScubaDive extends Application
         primaryStage.setTitle("Dive Planner (WARNING: THIS IS A PROTOTYPE!)");
         primaryStage.setScene(scene);
         primaryStage.show();
-    
+        
+    //Default comboboxes
+        optionsList9.setValue("35");
+        optionsList10.setValue("35");
+        
      // start caluclations on save button
         calculate.setOnAction(new EventHandler<ActionEvent>()
         		{	
@@ -129,16 +136,36 @@ public class ScubaDive extends Application
         		@Override
         		public void handle(ActionEvent actionEvent)
         		    {
-        			    resultSurfaceTimeField.setText(surfaceTimeField.getText());
-        			    resultTimeOneField.setText(timeOne.getText());
-        			    resultTimeTwoField.setText(timeTwo.getText());
-      
+        			
+
+        			
+        		if(timeTwo.getText().isEmpty() && surfaceTimeField.getText().isEmpty())	//case when user only wants one dive
+        		{
+        			try{
+            			resultTimeOneField.setText(timeOne.getText());
         			    resultDepthOneField.setText(optionsList9.getSelectionModel().getSelectedItem().toString());
-        			    
-        			    resultDepthTwoField.setText(optionsList10.getSelectionModel().getSelectedItem().toString());
-        			    
-        			    
+        			    char letter1 = PadiDiveTable.getPressureGroup(Integer.parseInt(optionsList9.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(timeOne.getText()));
+						
+    			    	resultLetterOneField.setText(Character.toString(letter1));
+    			    	request.setText("");
+        			}
+        			
+        			catch(NumberFormatException
+								| DepthOutOfRangeException
+								| TimeOutOfRangeException| NullPointerException e){
+        				
+        				request.setText("PLEASE ENTER VALID DATA!!!!!");
+        				e.printStackTrace();
+        			}
+        			
+        		}
+        		else{
         			    try {
+                			resultTimeOneField.setText(timeOne.getText());
+            			    resultDepthOneField.setText(optionsList9.getSelectionModel().getSelectedItem().toString());
+          			        resultSurfaceTimeField.setText(surfaceTimeField.getText());  			    
+            			    resultTimeTwoField.setText(timeTwo.getText());
+            			    resultDepthTwoField.setText(optionsList10.getSelectionModel().getSelectedItem().toString());
         			    	char letter1 = PadiDiveTable.getPressureGroup(Integer.parseInt(optionsList9.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(timeOne.getText()));
 							
         			    	resultLetterOneField.setText(Character.toString(letter1));
@@ -149,15 +176,21 @@ public class ScubaDive extends Application
         			    	
         			    	char letter2 = PadiDiveTable.getPressureGroup(Integer.parseInt(optionsList10.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(timeTwo.getText())+residualtime);
 						    resultLetterTwoField.setText(Character.toString(letter2));
+						    request.setText("");
         			    } catch (NumberFormatException
 								| DepthOutOfRangeException
-								| TimeOutOfRangeException e) {
+								| TimeOutOfRangeException| NullPointerException e) {
+							// TODO Auto-generated catch block
+							request.setText("PLEASE ENTER VALID DATA!!!!!");
+        			    	e.printStackTrace();//erease later
+						} catch (PressureGroupOutOfRangeException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
+							request.setText("PLEASE ENTER VALID DATA!!!!!");
 						}
         			    
         			    
-        		    }
+        		    }}
         		});
         
         
@@ -306,6 +339,7 @@ public class ScubaDive extends Application
         root.add(resultLetterTwo, 1, 20);
         root.add(resultLetterTwoField, 2, 20);
         root.add(prototype, 1, 21);
+        root.add(request, 1, 22);
         
         gas.setOnAction(new EventHandler<ActionEvent>() 
         {
