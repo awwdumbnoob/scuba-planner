@@ -24,12 +24,7 @@ public class ScubaDive extends Application
 {
     
     GridPane root = new GridPane();
-    Label eventName = new Label(" Project Name: ");
-    Label date = new Label(" Date:      ");
     Label prototype = new Label(" (THIS IS A PROTOTYPE!)");
-    Label o2 = new Label("O2 Level: ");
-    Label he = new Label("HE Level: ");
-    Label ne = new Label("NE Level: ");
     Label previousDiveTime = new Label("Previous Dive Time: ");
     Label surfaceIntervalTime = new Label("Surface Interval Time (SIT): ");
     Label preferenceUnits = new Label("Units: ");
@@ -62,14 +57,19 @@ public class ScubaDive extends Application
     Label resultLetterTwoField = new Label();
     Label resultSurfaceTime = new Label("Surface Time:");
     Label resultSurfaceTimeField = new Label();
+    Label resultSurfaceLetterGroup = new Label("Surface Letter Group:");
+    Label resultSurfaceLetterGroupField = new Label();
+    Label resultResidualNitrogenTime = new Label("Residual Nitrogen Time:");
+    Label resultResidualNitrogenTimeField = new Label();
     Label results = new Label("Results");
     Label request = new Label();
-    //Label secondsOne = new Label("Minutes");
-    //Label secondsTwo = new Label("Minutes");
-    TextField eventNameField = new TextField();
-    TextField fromField = new TextField("MM/DD/YYY");
-    TextField fromTime = new TextField("HH:MM");
-    TextField dateField = new TextField("MM/DD/YYY");
+    Label spaceOne = new Label();
+    Label spaceTwo = new Label();
+    Label spaceThree = new Label();
+    Label spaceFour = new Label();
+    Label spaceFive = new Label();
+    Label spaceSix = new Label();
+
     TextField timeField = new TextField("HH:MM");
     TextField pdt = new TextField("00h00m00s");
     TextField sit = new TextField("00h00m00s");
@@ -78,10 +78,6 @@ public class ScubaDive extends Application
     TextField timeOne = new TextField();
     TextField timeTwo = new TextField();
     TextField surfaceTimeField = new TextField();
-    Button gas = new Button("Gas Settings");
-    Button gasOk = new Button ("OK");
-    Button gasCancel = new Button ("Cancel");
-    Button gasApply = new Button ("Apply");
     Button dive = new Button ("Dive Settings");
     Button diveImport = new Button ("Import");
     Button diveOk = new Button ("OK");
@@ -102,14 +98,6 @@ public class ScubaDive extends Application
     ComboBox optionsList2 = new ComboBox(options2);
     ObservableList<String> options3 = FXCollections.observableArrayList("10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%");
     ComboBox optionsList3 = new ComboBox(options3);
-    //ObservableList<String> hoursOne = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
-    //ComboBox optionsList5 = new ComboBox(hoursOne);
-    //ObservableList<String> minutesboxOne = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
-    //ComboBox optionsList6 = new ComboBox(minutesboxOne);
-    //ObservableList<String> hoursTwo = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
-    //ComboBox optionsList7 = new ComboBox(hoursTwo);
-    //ObservableList<String> minutesboxTwo = FXCollections.observableArrayList("00", "02", "04", "06", "08", "10", "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60");
-    //ComboBox optionsList8 = new ComboBox(minutesboxTwo);
     ObservableList<String> depthboxOne = FXCollections.observableArrayList("35", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140");
     ComboBox optionsList9 = new ComboBox(depthboxOne);
     ObservableList<String> depthboxTwo = FXCollections.observableArrayList("35", "40", "50", "60", "70", "80", "90", "100", "110", "120", "130", "140");
@@ -170,10 +158,10 @@ public class ScubaDive extends Application
 							
         			    	resultLetterOneField.setText(Character.toString(letter1));
         			    	char rest = PadiDiveTable.newpressuregrouprest(Integer.parseInt(surfaceTimeField.getText()), letter1);
-        			    	System.out.println(rest);
+        			    	resultSurfaceLetterGroupField.setText(Character.toString(rest));
         			    
         			    	int residualtime = PadiDiveTable.getresidualnitrogentime(Integer.parseInt(optionsList10.getSelectionModel().getSelectedItem().toString()), rest);
-        			    	
+        			    	resultResidualNitrogenTimeField.setText(Integer.toString(residualtime));
         			    	char letter2 = PadiDiveTable.getPressureGroup(Integer.parseInt(optionsList10.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(timeTwo.getText())+residualtime);
 						    resultLetterTwoField.setText(Character.toString(letter2));
 						    request.setText("");
@@ -210,78 +198,6 @@ public class ScubaDive extends Application
             }
         });
         file.getItems().addAll(New, Open, Save, saveAs, Exit);
-    
-    //Edit Menu
-        Menu edit = new Menu("Edit");
-        MenuItem undo = new MenuItem("Undo");
-        MenuItem redo = new MenuItem("Redo");
-        MenuItem cut = new MenuItem("Cut");
-        MenuItem copy = new MenuItem("Copy");
-        MenuItem paste = new MenuItem("Paste");
-        MenuItem delete = new MenuItem("Delete");
-        MenuItem selectAll = new MenuItem("Select All");
-        MenuItem diveSettings = new MenuItem("Dive Settings");
-        MenuItem preferences = new MenuItem("Preferences");
-        edit.getItems().addAll(undo, redo, cut, copy, paste, delete, selectAll, diveSettings, preferences);
-        diveSettings.setOnAction(new EventHandler<ActionEvent>() 
-        {
-        	@Override
-        	public void handle(ActionEvent actionEvent)
-                {
-                    GridPane root = new GridPane();
-                    Scene DiveWindow = new Scene(root, 500, 120);
-                    
-                    root.setAlignment(Pos.TOP_LEFT);
-                    root.setHgap(10);
-                    root.setVgap(10);
-                    root.add(previousDiveTime, 1, 1);
-                    root.add(pdt, 2, 1);
-                    root.add(diveImport, 3, 1);
-                    root.add(surfaceIntervalTime, 1, 2);
-                    root.add(sit, 2, 2);
-                    root.add(diveOk, 3, 4);
-                    root.add(diveCancel, 4, 4);
-                    root.add(diveApply, 5, 4);
-        	    
-                    Stage GasOptions = new Stage();
-                    GasOptions.setTitle("Edit Dive Settings");
-                    GasOptions.setScene(DiveWindow);
-                    GasOptions.show();
-        	}
-        });
-        
-        preferences.setOnAction(new EventHandler<ActionEvent>() 
-        {
-        	@Override
-        	public void handle(ActionEvent actionEvent)
-                {
-                    GridPane root = new GridPane();
-                    Scene PreferenceWindow = new Scene(root, 290, 110);
-                    
-                    root.setAlignment(Pos.TOP_LEFT);
-                    root.setHgap(10);
-                    root.setVgap(10);
-                    root.add(preferenceUnits, 1, 1);
-                    root.add(preferenceFeet, 2, 1);
-                    root.add(preferenceMeters, 2, 2);
-                    root.add(preferenceOk, 3, 4);
-                    root.add(preferenceCancel, 4, 4);
-                    root.add(preferenceApply, 5, 4);
-        	    
-                    Stage GasOptions = new Stage();
-                    GasOptions.setTitle("Preferences");
-                    GasOptions.setScene(PreferenceWindow);
-                    GasOptions.show();
-        	}
-        });
-        
-    //View Menu
-        Menu view = new Menu("View");
-        MenuItem zoomIn = new MenuItem("Zoom in");
-        MenuItem zoomOut = new MenuItem("Zoom out");
-        MenuItem zoomDefault = new MenuItem("Zoom default");
-        MenuItem zoomToFit = new MenuItem("Zoom to fit");
-        view.getItems().addAll(zoomIn, zoomOut, zoomDefault, zoomToFit);
         
     //Help menu
         Menu help = new Menu("Help");
@@ -289,36 +205,30 @@ public class ScubaDive extends Application
         help.getItems().addAll(divePlannerManual);
     
     //Home Screen
-        fileMenu.getMenus().addAll(file, edit, view, help);
+        fileMenu.getMenus().addAll(file, help);
         root.setAlignment(Pos.TOP_LEFT);
         root.setHgap(10);
         root.setVgap(0);
         root.add(fileMenu, 1, 1);
-        root.add(eventName, 1, 2);
-        root.add(eventNameField, 2, 2);
-        root.add(date, 1, 3);
-        root.add(dateField, 2, 3);
-        root.add(runTimeOne, 1, 4);
-        root.add(timeOne, 2, 4);
-        root.add(minutesOne, 3, 4);
-        //root.add(optionsList6, 4, 4);
-        //root.add(secondsOne, 5, 4);
-        root.add(depthOne, 1, 5);
-        root.add(optionsList9, 2, 5);
-        root.add(depthLabelOne, 3, 5);
-        root.add(surfaceTime, 1, 6);
-        root.add(surfaceTimeField, 2, 6);
-        root.add(minutesThree, 3, 6);
-        root.add(runTimeTwo, 1, 7);
-        root.add(timeTwo, 2, 7);
-        root.add(minutesTwo, 3, 7);
-        //root.add(optionsList8, 4, 6);
-        //root.add(secondsTwo, 5, 6);
-        root.add(depthTwo, 1, 8);
-        root.add(optionsList10, 2, 8);
-        root.add(depthLabelTwo, 3, 8);
-        root.add(gas, 1, 9);
-        root.add(calculate, 1, 10);
+        root.add(spaceFive, 1, 2);
+        root.add(runTimeOne, 1, 3);
+        root.add(timeOne, 2, 3);
+        root.add(minutesOne, 3, 3);
+        root.add(depthOne, 1, 4);
+        root.add(optionsList9, 2, 4);
+        root.add(depthLabelOne, 3, 4);
+        root.add(surfaceTime, 1, 5);
+        root.add(surfaceTimeField, 2, 5);
+        root.add(minutesThree, 3, 5);
+        root.add(runTimeTwo, 1, 6);
+        root.add(timeTwo, 2, 6);
+        root.add(minutesTwo, 3, 6);
+        root.add(depthTwo, 1, 7);
+        root.add(optionsList10, 2, 7);
+        root.add(depthLabelTwo, 3, 7);
+        root.add(spaceSix, 1, 8);
+        root.add(calculate, 2, 9);
+        root.add(spaceOne, 1, 10);
         root.add(results, 1, 11);
         root.add(resultDiveOne, 1, 12);
         root.add(resultDiveOneField, 2, 12);
@@ -328,45 +238,24 @@ public class ScubaDive extends Application
         root.add(resultDepthOneField, 2, 14);
         root.add(resultLetterOne, 1, 15);
         root.add(resultLetterOneField, 2, 15);
-        root.add(resultSurfaceTime, 1, 16);
-        root.add(resultSurfaceTimeField, 2, 16);
-        root.add(resultDiveTwo, 1, 17);
-        root.add(resultDiveTwoField, 2, 17);
-        root.add(resultTimeTwo, 1, 18);
-        root.add(resultTimeTwoField, 2, 18);
-        root.add(resultDepthTwo, 1, 19);
-        root.add(resultDepthTwoField, 2, 19);
-        root.add(resultLetterTwo, 1, 20);
-        root.add(resultLetterTwoField, 2, 20);
-        root.add(prototype, 1, 21);
-        root.add(request, 1, 22);
-        
-        gas.setOnAction(new EventHandler<ActionEvent>() 
-        {
-        	@Override
-        	public void handle(ActionEvent actionEvent)
-                {
-                    GridPane root = new GridPane();
-                    Scene GasWindow = new Scene(root, 325, 150);
-                    
-                    root.setAlignment(Pos.TOP_LEFT);
-                    root.setHgap(10);
-                    root.setVgap(10);
-                    root.add(o2, 1, 1);
-                    root.add(optionsList, 2, 1);
-                    root.add(he, 1, 2);
-                    root.add(optionsList2, 2, 2);
-                    root.add(ne, 1, 3);
-                    root.add(optionsList3, 2, 3);
-                    root.add(gasOk, 3, 4);
-                    root.add(gasCancel, 4, 4);
-                    root.add(gasApply, 5, 4);
-        	    
-                    Stage GasOptions = new Stage();
-                    GasOptions.setTitle("Gas Settings");
-                    GasOptions.setScene(GasWindow);
-                    GasOptions.show();
-        	}
-        });
+        root.add(spaceFour, 1, 16);
+        root.add(resultSurfaceTime, 1, 17);
+        root.add(resultSurfaceTimeField, 2, 17);
+        root.add(resultSurfaceLetterGroup, 1, 18);
+        root.add(resultSurfaceLetterGroupField, 2, 18);
+        root.add(resultResidualNitrogenTime, 1, 19);
+        root.add(resultResidualNitrogenTimeField, 2, 19);
+        root.add(spaceTwo, 1, 20);
+        root.add(resultDiveTwo, 1, 21);
+        root.add(resultDiveTwoField, 2, 21);
+        root.add(resultTimeTwo, 1, 22);
+        root.add(resultTimeTwoField, 2, 22);
+        root.add(resultDepthTwo, 1, 23);
+        root.add(resultDepthTwoField, 2, 23);
+        root.add(resultLetterTwo, 1, 24);
+        root.add(resultLetterTwoField, 2, 24);
+        root.add(spaceThree, 1, 25);
+        root.add(prototype, 1, 26);
+        root.add(request, 1, 27);
     }
 }
