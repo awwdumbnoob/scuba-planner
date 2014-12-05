@@ -20,10 +20,24 @@ public class PadiDiveTableTest {
 			//make sure the arrows (-1) works
 			assertEquals("Expecting the value B", 'B', PadiDiveTable.getPressureGroup(140, 4));
 			assertEquals("Expecting the value G", 'G', PadiDiveTable.getPressureGroup(100, 12));
+
+			//tests getrisidualnitrogentime method
+			assertEquals("Expecting the value 30", 30, PadiDiveTable.getresidualnitrogentime(80, 'R'));
+			assertEquals("Expecting the value 12", 12, PadiDiveTable.getresidualnitrogentime(120, 'I'));
+			assertEquals("Expecting the value 12", 12, PadiDiveTable.getresidualnitrogentime(115, 'I'));
+			assertEquals("Expecting the value 10", 10, PadiDiveTable.getresidualnitrogentime(10, 'A'));
+			assertEquals("Expecting the value 205", 205, PadiDiveTable.getresidualnitrogentime(10, 'Z'));
+			assertEquals("Expecting the value 9", 9, PadiDiveTable.getresidualnitrogentime(95, 'D'));
+
+			//tests newpressuregrouprest method
+
+			assertEquals("Expecting the value A", 'A', PadiDiveTable.newpressuregrouprest(600, 'A'));
+			assertEquals("Expecting the value B", 'B', PadiDiveTable.newpressuregrouprest(47, 'B'));
+			assertEquals("Expecting the value G", 'G', PadiDiveTable.newpressuregrouprest(29, 'K'));
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 }

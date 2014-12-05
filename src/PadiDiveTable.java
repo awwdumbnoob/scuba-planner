@@ -1,3 +1,5 @@
+import org.omg.CORBA.TIMEOUT;
+
 /**
  * Basic Dive Planner
  * @author Duane Leong, Andrew Nishimura, Jiajie Li
@@ -105,21 +107,29 @@ private static int[][][] surfacetable = new int[][][]{
 		char pressureGroup = (char) (y + '@');
 		return pressureGroup;
 	}
-		//this function looks at the surface table to determine new letter group after a dive
+	//this function looks at the surface table to determine new letter group after a dive
 	// the rest time refers to time out of water
 	// the pressuregroup refers to the group entered after dive.  
 	// returns 'a' if the rest is longer than the last column
-	public static char newpressuregrouprest(int resttime, char pressuregroup){
+	public static char newpressuregrouprest(int resttime, char pressuregroup) throws TimeOutOfRangeException, PressureGroupOutOfRangeException{
+		if (resttime < 0) {
+			throw new TimeOutOfRangeException();
+		}
+		if (pressuregroup < 'A' || pressuregroup > 'Z') {
+			throw new PressureGroupOutOfRangeException();
+		}
+
+
 		int grouptocheck = pressuregroup-'@' -1;
 	
 		int grouplength = surfacetable[grouptocheck].length;
 		
-		char value = 'x';
+		char value = 'X';
 		
 		if(resttime>surfacetable[grouptocheck][grouplength-1][1]){
 			residualnitrogentime = 0;
 		
-		value = 'a'; //when the rest is greater than the last column value in the group
+		value = 'A'; //when the rest is greater than the last column value in the group
 	} else{
 		  for(int i=0;i<grouplength;i++){
 			  if(((surfacetable[grouptocheck][i][0] <= resttime ) && (surfacetable[grouptocheck][i][1] >= resttime))
@@ -129,16 +139,14 @@ private static int[][][] surfacetable = new int[][][]{
 			  }
 		  }
 	}
-	
 		return value;
 	
 }
    
-//this function gives the residual nitrogen time when a person plans for another dive
+	//this function gives the residual nitrogen time when a person plans for another dive
 	//assuming depth is an actual depth listed in the array
 	public static int getresidualnitrogentime(int depth, char lettergroup){
 		int y = lettergroup - '@';
-		System.out.println(y);
 		int x =0;
 		for (int i = 0; i < pressureGroup[0].length; i++) {
 			if (depth <= pressureGroup[0][i]) {
@@ -146,9 +154,25 @@ private static int[][][] surfacetable = new int[][][]{
 				break;
 			}
 		}
-		return pressureGroup[y][x];
+		int returnValue = pressureGroup[y][x];
+		if (returnValue == -1) {
+			return pressureGroup[y+1][x];
+		}
+		else {
+			return pressureGroup[y][x];
+		}
+
 	}
-	   
+
+	public static void main(String[] args) {
+		try {
+			System.out.println(newpressuregrouprest(3, 'Q'));
+			System.out.println(newpressuregrouprest(0, 'A'));
+			System.out.println(newpressuregrouprest(10, '?'));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
 
 @SuppressWarnings("serial")
@@ -158,4 +182,9 @@ class DepthOutOfRangeException extends Exception {
 @SuppressWarnings("serial")
 class TimeOutOfRangeException extends Exception {
 	
+}
+
+@SuppressWarnings("serial")
+class PressureGroupOutOfRangeException extends Exception {
+
 }
