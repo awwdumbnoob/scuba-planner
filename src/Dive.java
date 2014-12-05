@@ -77,10 +77,24 @@ public class Dive {
         return this.time;
     }
 
+    /**
+     * Returns the max depth traveled
+     * @return integer of the max depth traveled
+     */
+    public int getMaxDepth() {
+        return Collections.max(this.depth);
+    }
+
+    public char getPressureGroup() throws DepthOutOfRangeException, TimeOutOfRangeException {
+        return PadiDiveTable.getPressureGroup(this.getMaxDepth(), this.getTotalTime());
+    }
+
     public static void main(String[] args) {
         Dive dive = new Dive("test");
         dive.addPoint(10, 20);
         dive.addPoint(10, 20);
+        dive.addPoint(20, 10);
+        System.out.println(dive.getMaxDepth());
         System.out.println(dive.getTotalTime());
     }
 
