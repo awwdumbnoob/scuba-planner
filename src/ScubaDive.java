@@ -246,6 +246,7 @@ public class ScubaDive extends Application
         //File Menu
         MenuBar fileMenu = new MenuBar();
         Menu file = new Menu("File");
+        MenuItem New = new MenuItem("New");
         MenuItem Exit = new MenuItem("Exit");
         Exit.setOnAction(new EventHandler<ActionEvent>() 
         {
@@ -253,7 +254,7 @@ public class ScubaDive extends Application
                 System.exit(0);
             }
         });
-        file.getItems().addAll(Exit);
+        file.getItems().addAll(New, Exit);
         
         //Help menu
         Menu help = new Menu("Help");
@@ -269,7 +270,7 @@ public class ScubaDive extends Application
                     "This application takes your dive information and our program will read the padi dive table and return to you how you should plan your dive\n" +
                     "\n" +
                     "DISCLAIMER: WE are not liable for any injury or death that may occur from the data given by this application\n" +
-                    "WARNING: This scuba planner is a prototype and cannot be used to plan\n" +
+                    "Warning: This scuba planner is a prototype and cannot be used to plan\n" +
                     "\n" +
                     "Before you use please make sure you know these pieces of information\n" +
                     "Doing one or two dives\n" +
@@ -291,13 +292,10 @@ public class ScubaDive extends Application
                     "2. enter in the surface time \n" +
                     "3. enter time and depth of second dive into dive2 time and depth\n" +
                     "4. press calculate\n" +
-                    "5. The dive information is given below\n" +
-                    "ERROR CODES\n" +
-                    "PLEASE ENTER VALID DATA: This means that one of your inputs are incomplete or you entered an illegal character into a numeric box.\n" +
-                    "TIME IS OUT OF RANGE PLEASE ENTER SMALLER TIME: This means that your dive time is too long and it goes beyond our dive table.");
+                    "5. The dive information is given below\n");
                 helpOne.setWrapText(true);
                 comp.getChildren().add(helpOne);
-                Scene stageScene = new Scene(comp, 300, 800);
+                Scene stageScene = new Scene(comp, 300, 600);
                 newStage.setScene(stageScene);
                 newStage.show();
             }
