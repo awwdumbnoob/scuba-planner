@@ -112,11 +112,11 @@ public class ScubaDive extends Application
         primaryStage.setScene(scene);
         primaryStage.show();
         
-        //Default comboboxes
+    //Default comboboxes
         optionsList9.setValue("35");
         optionsList10.setValue("35");
         
-        // start caluclations on save button
+     // start caluclations on save button
         calculate.setOnAction(new EventHandler<ActionEvent>()
                         {       
                         
@@ -137,55 +137,22 @@ public class ScubaDive extends Application
                                 request.setText("");
                                 }
                                 
-                                catch(NumberFormatException | NullPointerException e) {
-                                    request.setText("PLEASE ENTER VALID DATA");
-                                    resultTimeOneField.setText("");
-                                    resultDepthOneField.setText("");
-                                    resultSurfaceTimeField.setText("");
-                                    resultTimeTwoField.setText("");
-                                    resultSurfaceLetterGroupField.setText("");
-                                    resultResidualNitrogenTimeField.setText("");
-                                    resultLetterTwoField.setText("");
-                                    resultSurfaceLetterGroupField.setText("");
-                                    resultDepthTwoField.setText("");
-                                    resultSurfaceLetterGroupField.setText("");
-                                    resultLetterOneField.setText("");
-                                } catch (TimeOutOfRangeException e) {
-                                    request.setText("TIME IS OUT OF RANGE,\nPLEASE ENTER SMALLER\nTIME");
-                                    resultTimeOneField.setText("");
-                                    resultDepthOneField.setText("");
-                                    resultSurfaceTimeField.setText("");
-                                    resultTimeTwoField.setText("");
-                                    resultSurfaceLetterGroupField.setText("");
-                                    resultResidualNitrogenTimeField.setText("");
-                                    resultLetterTwoField.setText("");
-                                    resultSurfaceLetterGroupField.setText("");
-                                    resultDepthTwoField.setText("");
-                                    resultSurfaceLetterGroupField.setText("");
-                                    resultLetterOneField.setText("");
-                                } catch (DepthOutOfRangeException e) {
-                                    request.setText("DEPTH IS OUT OF RANGE,\nPLEASE ENTER SMALLER\nDEPTH");
-                                    resultTimeOneField.setText("");
-                                    resultDepthOneField.setText("");
-                                    resultSurfaceTimeField.setText("");
-                                    resultTimeTwoField.setText("");
-                                    resultSurfaceLetterGroupField.setText("");
-                                    resultResidualNitrogenTimeField.setText("");
-                                    resultLetterTwoField.setText("");
-                                    resultSurfaceLetterGroupField.setText("");
-                                    resultDepthTwoField.setText("");
-                                    resultSurfaceLetterGroupField.setText("");
-                                    resultLetterOneField.setText("");
+                                catch(NumberFormatException
+                                                                | DepthOutOfRangeException
+                                                                | TimeOutOfRangeException| NullPointerException e){
+                                        
+                                        request.setText("PLEASE ENTER VALID DATA!!!!!");
+                                        e.printStackTrace();
                                 }
                                 
                         }
                         else{
                                     try {
                                         resultTimeOneField.setText(timeOne.getText());
-                                        resultDepthOneField.setText(optionsList9.getSelectionModel().getSelectedItem().toString());
+                                    resultDepthOneField.setText(optionsList9.getSelectionModel().getSelectedItem().toString());
                                         resultSurfaceTimeField.setText(surfaceTimeField.getText());                         
-                                        resultTimeTwoField.setText(timeTwo.getText());
-                                        resultDepthTwoField.setText(optionsList10.getSelectionModel().getSelectedItem().toString());
+                                    resultTimeTwoField.setText(timeTwo.getText());
+                                    resultDepthTwoField.setText(optionsList10.getSelectionModel().getSelectedItem().toString());
                                         char letter1 = PadiDiveTable.getPressureGroup(Integer.parseInt(optionsList9.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(timeOne.getText()));
                                                         
                                         resultLetterOneField.setText(Character.toString(letter1));
@@ -195,58 +162,33 @@ public class ScubaDive extends Application
                                         int residualtime = PadiDiveTable.getresidualnitrogentime(Integer.parseInt(optionsList10.getSelectionModel().getSelectedItem().toString()), rest);
                                         resultResidualNitrogenTimeField.setText(Integer.toString(residualtime));
                                         char letter2 = PadiDiveTable.getPressureGroup(Integer.parseInt(optionsList10.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(timeTwo.getText())+residualtime);
-                                        resultLetterTwoField.setText(Character.toString(letter2));
-                                        request.setText("");
-                                    } catch (NumberFormatException | NullPointerException | PressureGroupOutOfRangeException e) {
-                                        // TODO Auto-generated catch block
-                                        request.setText("PLEASE ENTER VALID DATA");
-                                        resultTimeOneField.setText("");
-                                        resultDepthOneField.setText("");
-                                        resultSurfaceTimeField.setText("");
-                                        resultTimeTwoField.setText("");
-                                        resultSurfaceLetterGroupField.setText("");
-                                        resultResidualNitrogenTimeField.setText("");
-                                        resultLetterTwoField.setText("");
-                                        resultSurfaceLetterGroupField.setText("");
-                                        resultDepthTwoField.setText("");
-                                        resultSurfaceLetterGroupField.setText("");
-                                        resultLetterOneField.setText("");
-                                    } catch (TimeOutOfRangeException e) {
-                                        request.setText("TIME IS OUT OF RANGE,\nPLEASE ENTER SMALLER\nTIME");
-                                        resultTimeOneField.setText("");
-                                        resultDepthOneField.setText("");
-                                        resultSurfaceTimeField.setText("");
-                                        resultTimeTwoField.setText("");
-                                        resultSurfaceLetterGroupField.setText("");
-                                        resultResidualNitrogenTimeField.setText("");
-                                        resultLetterTwoField.setText("");
-                                        resultSurfaceLetterGroupField.setText("");
-                                        resultDepthTwoField.setText("");
-                                        resultSurfaceLetterGroupField.setText("");
-                                        resultLetterOneField.setText("");
-                                    } catch (DepthOutOfRangeException e) {
-                                        request.setText("DEPTH IS OUT OF RANGE,\nPLEASE ENTER SMALLER\nDEPTH");
-                                        resultTimeOneField.setText("");
-                                        resultDepthOneField.setText("");
-                                        resultSurfaceTimeField.setText("");
-                                        resultTimeTwoField.setText("");
-                                        resultSurfaceLetterGroupField.setText("");
-                                        resultResidualNitrogenTimeField.setText("");
-                                        resultLetterTwoField.setText("");
-                                        resultSurfaceLetterGroupField.setText("");
-                                        resultDepthTwoField.setText("");
-                                        resultSurfaceLetterGroupField.setText("");
-                                        resultLetterOneField.setText("");
-                                    }
+                                                    resultLetterTwoField.setText(Character.toString(letter2));
+                                                    request.setText("");
+                                    } catch (NumberFormatException
+                                                                | DepthOutOfRangeException
+                                                                | TimeOutOfRangeException| NullPointerException e) {
+                                                        // TODO Auto-generated catch block
+                                                        request.setText("PLEASE ENTER VALID DATA!!!!!");
+                                        e.printStackTrace();//erease later
+                                                } catch (PressureGroupOutOfRangeException e) {
+                                                        // TODO Auto-generated catch block
+                                                        e.printStackTrace();
+                                                        request.setText("PLEASE ENTER VALID DATA!!!!!");
+                                                }
+                                    
+                                    
                             }}
                         });
         
         
         
-        //File Menu
+    //File Menu
         MenuBar fileMenu = new MenuBar();
         Menu file = new Menu("File");
         MenuItem New = new MenuItem("New");
+        MenuItem Open = new MenuItem("Open");
+        MenuItem Save = new MenuItem("Save");
+        MenuItem saveAs = new MenuItem("Save As");
         MenuItem Exit = new MenuItem("Exit");
         Exit.setOnAction(new EventHandler<ActionEvent>() 
         {
@@ -254,14 +196,29 @@ public class ScubaDive extends Application
                 System.exit(0);
             }
         });
-        file.getItems().addAll(New, Exit);
+        file.getItems().addAll(New, Open, Save, saveAs, Exit);
         
-        //Help menu
+    //Help menu
         Menu help = new Menu("Help");
         MenuItem divePlannerManual = new MenuItem("Dive Planner Manual");
         help.getItems().addAll(divePlannerManual);
+        divePlannerManual.setOnAction(new EventHandler<ActionEvent>() 
+        {
+            public void handle(ActionEvent t) {
+                Stage newStage = new Stage();
+                newStage.setTitle("Dive Planner Manual");
+                VBox comp = new VBox();
+                Label helpOne = new Label("line 1");
+                Label helpTwo = new Label("line 2");
+                comp.getChildren().add(helpOne);
+                comp.getChildren().add(helpTwo);
+                Scene stageScene = new Scene(comp, 300, 300);
+                newStage.setScene(stageScene);
+                newStage.show();
+            }
+        });
     
-        //Home Screen
+    //Home Screen
         fileMenu.getMenus().addAll(file, help);
         root.setAlignment(Pos.TOP_LEFT);
         root.setHgap(10);
