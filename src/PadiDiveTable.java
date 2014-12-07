@@ -168,13 +168,6 @@ private static int[][][] surfacetable = new int[][][]{
 	}
 
 	public static void main(String[] args) {
-		try {
-			System.out.println(newpressuregrouprest(3, 'Q'));
-			System.out.println(newpressuregrouprest(0, 'A'));
-			System.out.println(newpressuregrouprest(10, '?'));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 }
 
