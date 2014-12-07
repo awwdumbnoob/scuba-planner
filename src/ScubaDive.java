@@ -138,7 +138,7 @@ public class ScubaDive extends Application
                                 }
                                 
                                 catch(NumberFormatException | NullPointerException e) {
-                                    request.setText("PLEASE ENTER VALID\nDATA");
+                                    request.setText("PLEASE ENTER VALID DATA");
                                     resultTimeOneField.setText("");
                                     resultDepthOneField.setText("");
                                     resultSurfaceTimeField.setText("");
@@ -151,7 +151,7 @@ public class ScubaDive extends Application
                                     resultSurfaceLetterGroupField.setText("");
                                     resultLetterOneField.setText("");
                                 } catch (TimeOutOfRangeException e) {
-                                    request.setText("TIME IS OUT OF RANGE,\nPLEASE ENTER SMALLER\nTIME");
+                                    request.setText("TIME IS OUT OF RANGE,\nPLEASE ENTER TIME AGAIN");
                                     resultTimeOneField.setText("");
                                     resultDepthOneField.setText("");
                                     resultSurfaceTimeField.setText("");
@@ -164,7 +164,7 @@ public class ScubaDive extends Application
                                     resultSurfaceLetterGroupField.setText("");
                                     resultLetterOneField.setText("");
                                 } catch (DepthOutOfRangeException e) {
-                                    request.setText("DEPTH IS OUT OF RANGE,\nPLEASE ENTER SMALLER\nDEPTH");
+                                    request.setText("DEPTH IS OUT OF RANGE,\nPLEASE ENTER DEPTH AGAIN");
                                     resultTimeOneField.setText("");
                                     resultDepthOneField.setText("");
                                     resultSurfaceTimeField.setText("");
@@ -194,12 +194,17 @@ public class ScubaDive extends Application
                                     
                                         int residualtime = PadiDiveTable.getresidualnitrogentime(Integer.parseInt(optionsList10.getSelectionModel().getSelectedItem().toString()), rest);
                                         resultResidualNitrogenTimeField.setText(Integer.toString(residualtime));
-                                        char letter2 = PadiDiveTable.getPressureGroup(Integer.parseInt(optionsList10.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(timeTwo.getText())+residualtime);
-                                        resultLetterTwoField.setText(Character.toString(letter2));
-                                        request.setText("");
+                                        if (Integer.parseInt(timeTwo.getText()) < 0) {
+                                            throw new TimeOutOfRangeException();
+                                        }
+                                        else {
+                                            char letter2 = PadiDiveTable.getPressureGroup(Integer.parseInt(optionsList10.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(timeTwo.getText())+residualtime);
+                                            resultLetterTwoField.setText(Character.toString(letter2));
+                                            request.setText("");
+                                        }
                                     } catch (NumberFormatException | NullPointerException | PressureGroupOutOfRangeException e) {
                                         // TODO Auto-generated catch block
-                                        request.setText("PLEASE ENTER VALID\nDATA");
+                                        request.setText("PLEASE ENTER VALID DATA");
                                         resultTimeOneField.setText("");
                                         resultDepthOneField.setText("");
                                         resultSurfaceTimeField.setText("");
@@ -212,7 +217,7 @@ public class ScubaDive extends Application
                                         resultSurfaceLetterGroupField.setText("");
                                         resultLetterOneField.setText("");
                                     } catch (TimeOutOfRangeException e) {
-                                        request.setText("TIME IS OUT OF RANGE,\nPLEASE ENTER SMALLER\nTIME");
+                                        request.setText("TIME IS OUT OF RANGE,\nPLEASE ENTER TIME AGAIN");
                                         resultTimeOneField.setText("");
                                         resultDepthOneField.setText("");
                                         resultSurfaceTimeField.setText("");
@@ -225,7 +230,7 @@ public class ScubaDive extends Application
                                         resultSurfaceLetterGroupField.setText("");
                                         resultLetterOneField.setText("");
                                     } catch (DepthOutOfRangeException e) {
-                                        request.setText("DEPTH IS OUT OF RANGE,\nPLEASE ENTER SMALLER\nDEPTH");
+                                        request.setText("DEPTH IS OUT OF RANGE,\nPLEASE ENTER DEPTH AGAIN");
                                         resultTimeOneField.setText("");
                                         resultDepthOneField.setText("");
                                         resultSurfaceTimeField.setText("");
@@ -295,7 +300,7 @@ public class ScubaDive extends Application
                     "\n" +
                     "ERROR CODES\n" +
                     "PLEASE ENTER VALID DATA: This means that one of your inputs are incomplete or you entered an illegal character into a numeric box.\n" +
-                    "TIME IS OUT OF RANGE PLEASE ENTER SMALLER TIME: This means that your dive time is too long and it goes beyond our dive table.");
+                    "TIME IS OUT OF RANGE PLEASE ENTER TIME AGAIN: This means that your dive time is too long or too short and it goes beyond our dive table.");
                 helpOne.setWrapText(true);
                 comp.getChildren().add(helpOne);
                 Scene stageScene = new Scene(comp, 400, 750);

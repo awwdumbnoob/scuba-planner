@@ -36,8 +36,7 @@ Error codes
 
 PLEASE ENTER VALID DATA: This means that one of your inputs are incomplete or you entered an illegal character into a numeric box.
 
-TIME IS OUT OF RANGE PLEASE ENTER SMALLER TIME: This means that your dive time is too long and it goes beyond our dive table.
-
+TIME IS OUT OF RANGE PLEASE ENTER TIME AGAIN: This means that your dive time is too long or too short and it goes beyond our dive table.
 
 
 
