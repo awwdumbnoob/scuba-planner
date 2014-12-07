@@ -1,5 +1,4 @@
 import java.util.List;
-
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -119,67 +118,67 @@ public class ScubaDive extends Application
         
      // start caluclations on save button
         calculate.setOnAction(new EventHandler<ActionEvent>()
-        		{	
-        		
-        		@Override
-        		public void handle(ActionEvent actionEvent)
-        		    {
-        			
+                        {       
+                        
+                        @Override
+                        public void handle(ActionEvent actionEvent)
+                            {
+                                
 
-        			
-        		if(timeTwo.getText().isEmpty() && surfaceTimeField.getText().isEmpty())	//case when user only wants one dive
-        		{
-        			try{
-            			resultTimeOneField.setText(timeOne.getText());
-        			    resultDepthOneField.setText(optionsList9.getSelectionModel().getSelectedItem().toString());
-        			    char letter1 = PadiDiveTable.getPressureGroup(Integer.parseInt(optionsList9.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(timeOne.getText()));
-						
-    			    	resultLetterOneField.setText(Character.toString(letter1));
-    			    	request.setText("");
-        			}
-        			
-        			catch(NumberFormatException
-								| DepthOutOfRangeException
-								| TimeOutOfRangeException| NullPointerException e){
-        				
-        				request.setText("PLEASE ENTER VALID DATA!!!!!");
-        				e.printStackTrace();
-        			}
-        			
-        		}
-        		else{
-        			    try {
-                			resultTimeOneField.setText(timeOne.getText());
-            			    resultDepthOneField.setText(optionsList9.getSelectionModel().getSelectedItem().toString());
-          			        resultSurfaceTimeField.setText(surfaceTimeField.getText());  			    
-            			    resultTimeTwoField.setText(timeTwo.getText());
-            			    resultDepthTwoField.setText(optionsList10.getSelectionModel().getSelectedItem().toString());
-        			    	char letter1 = PadiDiveTable.getPressureGroup(Integer.parseInt(optionsList9.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(timeOne.getText()));
-							
-        			    	resultLetterOneField.setText(Character.toString(letter1));
-        			    	char rest = PadiDiveTable.newpressuregrouprest(Integer.parseInt(surfaceTimeField.getText()), letter1);
-        			    	resultSurfaceLetterGroupField.setText(Character.toString(rest));
-        			    
-        			    	int residualtime = PadiDiveTable.getresidualnitrogentime(Integer.parseInt(optionsList10.getSelectionModel().getSelectedItem().toString()), rest);
-        			    	resultResidualNitrogenTimeField.setText(Integer.toString(residualtime));
-        			    	char letter2 = PadiDiveTable.getPressureGroup(Integer.parseInt(optionsList10.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(timeTwo.getText())+residualtime);
-						    resultLetterTwoField.setText(Character.toString(letter2));
-						    request.setText("");
-        			    } catch (NumberFormatException
-								| DepthOutOfRangeException
-								| TimeOutOfRangeException| NullPointerException e) {
-							// TODO Auto-generated catch block
-							request.setText("PLEASE ENTER VALID DATA!!!!!");
-        			    	e.printStackTrace();//erease later
-						} catch (PressureGroupOutOfRangeException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-							request.setText("PLEASE ENTER VALID DATA!!!!!");
-						}
-        			    
-        			    
-        		    }}
-        		});
+                                
+                        if(timeTwo.getText().isEmpty() && surfaceTimeField.getText().isEmpty()) //case when user only wants one dive
+                        {
+                                try{
+                                resultTimeOneField.setText(timeOne.getText());
+                                    resultDepthOneField.setText(optionsList9.getSelectionModel().getSelectedItem().toString());
+                                    char letter1 = PadiDiveTable.getPressureGroup(Integer.parseInt(optionsList9.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(timeOne.getText()));
+                                                
+                                resultLetterOneField.setText(Character.toString(letter1));
+                                request.setText("");
+                                }
+                                
+                                catch(NumberFormatException
+                                                                | DepthOutOfRangeException
+                                                                | TimeOutOfRangeException| NullPointerException e){
+                                        
+                                        request.setText("PLEASE ENTER VALID DATA!!!!!");
+                                        e.printStackTrace();
+                                }
+                                
+                        }
+                        else{
+                                    try {
+                                        resultTimeOneField.setText(timeOne.getText());
+                                    resultDepthOneField.setText(optionsList9.getSelectionModel().getSelectedItem().toString());
+                                        resultSurfaceTimeField.setText(surfaceTimeField.getText());                         
+                                    resultTimeTwoField.setText(timeTwo.getText());
+                                    resultDepthTwoField.setText(optionsList10.getSelectionModel().getSelectedItem().toString());
+                                        char letter1 = PadiDiveTable.getPressureGroup(Integer.parseInt(optionsList9.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(timeOne.getText()));
+                                                        
+                                        resultLetterOneField.setText(Character.toString(letter1));
+                                        char rest = PadiDiveTable.newpressuregrouprest(Integer.parseInt(surfaceTimeField.getText()), letter1);
+                                        resultSurfaceLetterGroupField.setText(Character.toString(rest));
+                                    
+                                        int residualtime = PadiDiveTable.getresidualnitrogentime(Integer.parseInt(optionsList10.getSelectionModel().getSelectedItem().toString()), rest);
+                                        resultResidualNitrogenTimeField.setText(Integer.toString(residualtime));
+                                        char letter2 = PadiDiveTable.getPressureGroup(Integer.parseInt(optionsList10.getSelectionModel().getSelectedItem().toString()), Integer.parseInt(timeTwo.getText())+residualtime);
+                                                    resultLetterTwoField.setText(Character.toString(letter2));
+                                                    request.setText("");
+                                    } catch (NumberFormatException
+                                                                | DepthOutOfRangeException
+                                                                | TimeOutOfRangeException| NullPointerException e) {
+                                                        // TODO Auto-generated catch block
+                                                        request.setText("PLEASE ENTER VALID DATA!!!!!");
+                                        e.printStackTrace();//erease later
+                                                } catch (PressureGroupOutOfRangeException e) {
+                                                        // TODO Auto-generated catch block
+                                                        e.printStackTrace();
+                                                        request.setText("PLEASE ENTER VALID DATA!!!!!");
+                                                }
+                                    
+                                    
+                            }}
+                        });
         
         
         
@@ -246,16 +245,16 @@ public class ScubaDive extends Application
         root.add(resultResidualNitrogenTime, 1, 19);
         root.add(resultResidualNitrogenTimeField, 2, 19);
         root.add(spaceTwo, 1, 20);
-        root.add(resultDiveTwo, 1, 21);
-        root.add(resultDiveTwoField, 2, 21);
-        root.add(resultTimeTwo, 1, 22);
-        root.add(resultTimeTwoField, 2, 22);
-        root.add(resultDepthTwo, 1, 23);
-        root.add(resultDepthTwoField, 2, 23);
-        root.add(resultLetterTwo, 1, 24);
-        root.add(resultLetterTwoField, 2, 24);
+        root.add(resultDiveTwo, 3, 12);
+        root.add(resultDiveTwoField, 4, 12);
+        root.add(resultTimeTwo, 3, 13);
+        root.add(resultTimeTwoField, 4, 13);
+        root.add(resultDepthTwo, 3, 14);
+        root.add(resultDepthTwoField, 4, 14);
+        root.add(resultLetterTwo, 3, 15);
+        root.add(resultLetterTwoField, 4, 15);
         root.add(spaceThree, 1, 25);
-        root.add(prototype, 1, 26);
-        root.add(request, 1, 27);
+        root.add(prototype, 1, 21);
+        root.add(request, 1, 22);
     }
 }
