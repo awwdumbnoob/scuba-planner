@@ -105,6 +105,9 @@ private static int[][][] surfacetable = new int[][][]{
 		}
 
 		char pressureGroup = (char) (y + '@');
+		if (pressureGroup < 'A' || pressureGroup > 'Z') {
+			throw new TimeOutOfRangeException();
+		}
 		return pressureGroup;
 	}
 	//this function looks at the surface table to determine new letter group after a dive
