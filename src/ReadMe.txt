@@ -1,4 +1,4 @@
-This application takes your dive infromation and our program will read the padi dive table and return to you how you should plan your dive
+This application takes your dive information and our program will read the padi dive table and return to you how you should plan your dive
 
 
 DISCLAIMER:WE are not liable for any injury or death that may occur from the data given by this application
@@ -24,6 +24,14 @@ Case2: Want two dives
 3. enter time and depth of second dive into dive2 time and depth
 4. press calculate
 5. The dive information is given below
+
+
+Error codes
+
+PLEASE ENTER VALID DATA: This means that one of your inputs are incomplete or you entered an illegal character into a numeric box.
+
+TIME IS OUT OF RANGE PLEASE ENTER SMALLER TIME: This means that your dive time is too long and it goes beyond our dive table.
+
 
 
 
