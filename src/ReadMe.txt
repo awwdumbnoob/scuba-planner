@@ -1,5 +1,6 @@
 This application takes your dive information and our program will read the padi dive table and return to you how you should plan your dive
 
+To use, please compile PadiDiveTable.java and ScubaDive.java with a runtime environment of 1.7 or later.  Execute ScubaDive to bring up the GUI.
 
 DISCLAIMER:WE are not liable for any injury or death that may occur from the data given by this application
 
@@ -24,7 +25,6 @@ Case2: Want two dives
 3. enter time and depth of second dive into dive2 time and depth
 4. press calculate
 5. The dive information is given below
-
 
 Error codes
 
