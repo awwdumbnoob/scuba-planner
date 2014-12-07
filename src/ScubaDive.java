@@ -138,7 +138,7 @@ public class ScubaDive extends Application
                                 }
                                 
                                 catch(NumberFormatException | NullPointerException e) {
-                                    request.setText("PLEASE ENTER VALID DATA");
+                                    request.setText("PLEASE ENTER VALID\nDATA");
                                     resultTimeOneField.setText("");
                                     resultDepthOneField.setText("");
                                     resultSurfaceTimeField.setText("");
@@ -199,7 +199,7 @@ public class ScubaDive extends Application
                                         request.setText("");
                                     } catch (NumberFormatException | NullPointerException | PressureGroupOutOfRangeException e) {
                                         // TODO Auto-generated catch block
-                                        request.setText("PLEASE ENTER VALID DATA");
+                                        request.setText("PLEASE ENTER VALID\nDATA");
                                         resultTimeOneField.setText("");
                                         resultDepthOneField.setText("");
                                         resultSurfaceTimeField.setText("");
@@ -266,11 +266,36 @@ public class ScubaDive extends Application
                 Stage newStage = new Stage();
                 newStage.setTitle("Dive Planner Manual");
                 VBox comp = new VBox();
-                Label helpOne = new Label("line 1");
-                Label helpTwo = new Label("line 2");
+                Label helpOne = new Label(
+                    "This application takes your dive information and our program will read the padi dive table and return to you how you should plan your dive\n" +
+                    "\n" +
+                    "DISCLAIMER: WE are not liable for any injury or death that may occur from the data given by this application\n" +
+                    "Warning: This scuba planner is a prototype and cannot be used to plan\n" +
+                    "\n" +
+                    "Before you use please make sure you know these pieces of information\n" +
+                    "Doing one or two dives\n" +
+                    "Dive depth and time for first dive\n" +
+                    "Dive depth and time for second dive\n" +
+                    "surface time in between two dives\n" +
+                    "\n"+
+                    "Units used\n" +
+                    "Time: total minutes\n" +
+                    "depth: Feet\n" +
+                    "\n" +
+                    "Case1: Only want one dive\n" +
+                    "1.enter in dive time and depth into only dive1 time and depth\n" +
+                    "2. press calculate\n" +
+                    "3. the dive information is given below\n" +
+                    "\n" +
+                    "Case2: Want two dives\n" +
+                    "1. enter time and depth of the first dive into dive1 time and depth\n" +
+                    "2. enter in the surface time \n" +
+                    "3. enter time and depth of second dive into dive2 time and depth\n" +
+                    "4. press calculate\n" +
+                    "5. The dive information is given below\n");
+                helpOne.setWrapText(true);
                 comp.getChildren().add(helpOne);
-                comp.getChildren().add(helpTwo);
-                Scene stageScene = new Scene(comp, 300, 300);
+                Scene stageScene = new Scene(comp, 300, 600);
                 newStage.setScene(stageScene);
                 newStage.show();
             }
