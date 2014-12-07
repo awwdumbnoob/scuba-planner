@@ -1,5 +1,11 @@
-This application takes your dive information and our program will read the padi dive table and return to you how you should plan your dive
+To compile this application, compile the following files:
+PadiDiveTable.java
+ScubaDive.java
 
+To run this application run the following files:
+ScubaDive.java
+
+This application takes your dive information and our program will read the padi dive table and return to you how you should plan your dive
 
 DISCLAIMER:WE are not liable for any injury or death that may occur from the data given by this application
 

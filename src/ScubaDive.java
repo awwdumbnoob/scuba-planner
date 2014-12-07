@@ -246,7 +246,6 @@ public class ScubaDive extends Application
         //File Menu
         MenuBar fileMenu = new MenuBar();
         Menu file = new Menu("File");
-        MenuItem New = new MenuItem("New");
         MenuItem Exit = new MenuItem("Exit");
         Exit.setOnAction(new EventHandler<ActionEvent>() 
         {
@@ -254,7 +253,7 @@ public class ScubaDive extends Application
                 System.exit(0);
             }
         });
-        file.getItems().addAll(New, Exit);
+        file.getItems().addAll(Exit);
         
         //Help menu
         Menu help = new Menu("Help");
@@ -292,10 +291,14 @@ public class ScubaDive extends Application
                     "2. enter in the surface time \n" +
                     "3. enter time and depth of second dive into dive2 time and depth\n" +
                     "4. press calculate\n" +
-                    "5. The dive information is given below\n");
+                    "5. The dive information is given below\n" + 
+                    "\n" +
+                    "ERROR CODES\n" +
+                    "PLEASE ENTER VALID DATA: This means that one of your inputs are incomplete or you entered an illegal character into a numeric box.\n" +
+                    "TIME IS OUT OF RANGE PLEASE ENTER SMALLER TIME: This means that your dive time is too long and it goes beyond our dive table.");
                 helpOne.setWrapText(true);
                 comp.getChildren().add(helpOne);
-                Scene stageScene = new Scene(comp, 300, 600);
+                Scene stageScene = new Scene(comp, 400, 750);
                 newStage.setScene(stageScene);
                 newStage.show();
             }
